@@ -11,6 +11,7 @@ def get_animal_facts(data):
     """extracts information from data and returns them in one string"""
     output = ""
     for animal in data:
+        output += '<li class="cards__item">'
         try:
             animal_name = animal["name"]
             output += f"Name: {animal_name}\n"
@@ -31,6 +32,7 @@ def get_animal_facts(data):
             output += f"Type: {animal_type}"
         except KeyError:
             continue
+        output += "</li>"
     return output
 
 
