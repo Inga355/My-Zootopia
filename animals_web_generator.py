@@ -14,22 +14,22 @@ def get_animal_facts(data):
         output += '<li class="cards__item">'
         try:
             animal_name = animal["name"]
-            output += f"Name: {animal_name}\n"
+            output += f"Name: {animal_name}<br>"
         except KeyError:
             continue
         try:
             animal_diet = animal["characteristics"]["diet"]
-            output += f"Diet: {animal_diet}\n"
+            output += f"Diet: {animal_diet}<br>"
         except KeyError:
             continue
         try:
             animal_location = animal["locations"][0]
-            output += f"Location: {animal_location}\n"
+            output += f"Location: {animal_location}<br>"
         except KeyError:
             continue
         try:
             animal_type = animal["characteristics"]["type"]
-            output += f"Type: {animal_type}"
+            output += f"Type: {animal_type}<br>"
         except KeyError:
             continue
         output += "</li>"
