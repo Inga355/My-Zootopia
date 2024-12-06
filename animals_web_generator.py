@@ -14,9 +14,10 @@ def get_animal_facts(data):
         output += '<li class="cards__item">'
         try:
             animal_name = animal["name"]
-            output += f"<strong>Name:</strong> {animal_name}<br>"
+            output += f"<div class='card__title'>{animal_name}</div><br>"
         except KeyError:
             continue
+        output += f"<p class='card__text'>"
         try:
             animal_diet = animal["characteristics"]["diet"]
             output += f"<strong>Diet:</strong> {animal_diet}<br>"
@@ -32,7 +33,7 @@ def get_animal_facts(data):
             output += f"<strong>Type:</strong> {animal_type}<br>"
         except KeyError:
             continue
-        output += "</li>"
+        output += "</p></li>"
     return output
 
 
