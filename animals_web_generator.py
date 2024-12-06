@@ -1,16 +1,30 @@
-import json
+import json 
+
+
+def main():
+    """
+    main function
+    """ 
+    animal_data = load_data("animals_data.json")
+    animal_facts = get_animal_facts(animal_data)
+    generate_html(animal_facts) 
+
+
 
 def load_data(file_path):
-    """loads JSON file"""
+    """
+    loads JSON file
+    """
     with open(file_path, "r") as handle:
         return json.load(handle)
 
-animals_data = load_data("animals_data.json")
 
-def get_animal_facts(data):
-    """extracts information from data and returns them in one string"""
+def get_animal_facts(animal_data):
+    """
+    extracts information from data and returns them in one html string
+    """
     output = ""
-    for animal in data:
+    for animal in animal_data:
         output += '<li class="cards__item">'
         try:
             animal_name = animal["name"]
@@ -37,15 +51,19 @@ def get_animal_facts(data):
     return output
 
 
+def generate_html(animal_facts):
+    """
+    generates new html file with animal facts extracted from json file
+    """
+    with open("animals_template.html", "r") as file:
+        html_content = file.read()
+        old_string = "__REPLACE_ANIMALS_INFO__"
+        new_string = animal_facts
+        updated_html_content = html_content.replace(old_string, new_string)
+        with open("animals.html", "w", encoding="utf-8") as new_file:
+            new_file.write(updated_html_content)
 
-# Lesen und Speichern des neuen HTML
-with open("animals_template.html", "r") as file:
-    html_content = file.read()
 
-old_string = "__REPLACE_ANIMALS_INFO__"
-new_string = get_animal_facts(animals_data)
 
-updated_html_content = html_content.replace(old_string, new_string)
-
-with open("animals.html", "w", encoding="utf-8") as new_file:
-    new_file.write(updated_html_content)
+if __name__ == "__main__":
+    main()
