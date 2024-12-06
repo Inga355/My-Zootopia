@@ -14,7 +14,7 @@ def get_animal_facts(data):
         output += '<li class="cards__item">'
         try:
             animal_name = animal["name"]
-            output += f"<div class='card__title'>{animal_name}</div><br>"
+            output += f"<div class='card__title'>{animal_name}</div>"
         except KeyError:
             continue
         output += f"<p class='card__text'>"
