@@ -1,9 +1,12 @@
 import requests
 import json
 import animals_web_generator
+import os
+from dotenv import load_dotenv
 
 
-API_KEY = 'swtBLqjYCXOEnn10IUaR6w==Yg8LJCFsmScWP10o'
+load_dotenv()
+API_KEY = os.getenv('API_KEY')
 
 
 def load_data():
