@@ -3,14 +3,17 @@ import json
 import animals_web_generator
 
 
+API_KEY = 'swtBLqjYCXOEnn10IUaR6w==Yg8LJCFsmScWP10o'
+
+
 def load_data():
     """
-    asks the user for an animal and gets the data form API
+    asks the user for an animal and gets the data from API
     """
     while True:
         name = input("Enter a name of an animal: ")
         api_url = 'https://api.api-ninjas.com/v1/animals?name={}'.format(name)
-        response = requests.get(api_url, headers={'X-Api-Key': 'swtBLqjYCXOEnn10IUaR6w==Yg8LJCFsmScWP10o'})
+        response = requests.get(api_url, headers={'X-Api-Key': f"{API_KEY}" })
         if response.status_code == requests.codes.ok and response.json() != []:
             return response.json()
         else:
