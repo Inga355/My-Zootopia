@@ -1,22 +1,28 @@
-import json 
+import json
+import requests
 
 
 def main():
     """
     main function
     """ 
-    animal_data = load_data("animals_data.json")
+    animal_data = load_data()
     animal_facts = get_animal_facts(animal_data)
     generate_html(animal_facts) 
 
 
 
-def load_data(file_path):
+def load_data():
     """
-    loads JSON file
+    asks the user for an animal and gets the data form API
     """
-    with open(file_path, "r") as handle:
-        return json.load(handle)
+    name = input("Enter a name of an animal: ")
+    api_url = 'https://api.api-ninjas.com/v1/animals?name={}'.format(name)
+    response = requests.get(api_url, headers={'X-Api-Key': 'swtBLqjYCXOEnn10IUaR6w==Yg8LJCFsmScWP10o'})
+    if response.status_code == requests.codes.ok:
+        return response.json()
+    else:
+        print("Error:", response.status_code, response.text)
 
 
 def get_animal_facts(animal_data):
@@ -62,7 +68,6 @@ def generate_html(animal_facts):
         updated_html_content = html_content.replace(old_string, new_string)
         with open("animals.html", "w", encoding="utf-8") as new_file:
             new_file.write(updated_html_content)
-
 
 
 if __name__ == "__main__":
